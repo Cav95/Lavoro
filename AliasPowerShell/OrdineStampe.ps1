@@ -1,0 +1,1 @@
+copy 'T:\MacroUT\Ordinare stampe.xlsx' .\

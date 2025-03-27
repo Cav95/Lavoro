@@ -1,0 +1,1 @@
+copy 'T:\FogliElettronici-Modelli\Stampe Officina.xlsx' .\

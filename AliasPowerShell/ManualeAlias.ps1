@@ -1,0 +1,1 @@
+cat "\\SRVUT\Transfert\MATTIA CAVINA\WindowsPowerShell\Alman.txt"

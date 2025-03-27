@@ -1,0 +1,1 @@
+copy 'T:\FogliElettronici-Modelli\VST-J-R14.xlsm' .\
