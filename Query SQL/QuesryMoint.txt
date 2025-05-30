@@ -1,0 +1,3 @@
+select COCOEIMP
+from ADHOC.adhoc.CEPIDIS_COMP
+where COCODCOM = 'M.O.INT.' and corifdis = <TAG>
