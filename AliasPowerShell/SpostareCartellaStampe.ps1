@@ -1,5 +1,5 @@
 #mi salvo la mia locazione attuale per esteso
-$mypath = pwd
+$mypath = Get-Location
 #Prendo il nome della directory che voglio spostare
 $mylocation=Split-Path -Leaf (Get-Location)
 #Salvo i primi 4 caratteri
@@ -42,13 +42,10 @@ $orderFolder="4800-4899"
 $orderFolder="4900-4999"
 }
 
-cd "\\srvut\Commesse\$orderFolder\$NumCommessa*"
-$p=pwd
-echo "$p"
-cd "$mypath"
-Get-ChildItem -Path "\\srvut\Commesse\$orderFolder\$NumCommessa*\" -Filter *.dwg | ForEach-Object {
-Copy-Item -Path "$_.FullName" -Destination "$mypath"
-}
+Set-Location "\\srvut\Commesse\$orderFolder\$NumCommessa*"
+$p=Get-Location
+#Write-Output "$p"
+Set-Location "$mypath"
 Get-ChildItem -Directory | ForEach-Object {
 $name=$_.Name
 #echo $name
@@ -64,5 +61,5 @@ if ($name.Contains("Montatori")) {
 Copy-Item -Path "$p\*t*$NumCommessa*.dwg" -Destination "$mypath\$name\"
 }
 }
-cd ..
-copy -Recurse .\$mylocation "$destination\$mylocation($myname)_$date"
+Set-Location ..
+Copy-Item -Recurse .\$mylocation "$destination\$mylocation($myname)_$date"
