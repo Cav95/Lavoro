@@ -5,8 +5,8 @@ $mylocation=Split-Path -Leaf (Get-Location)
 #Salvo i primi 4 caratteri
 $NumCommessa= $mylocation.Substring(0,4)
 #Salvo la cartella di destinazione
-$destination="C:\Users\mcavina\OneDrive - CEPI s.p.a\Desktop\prova"
-#"\\SRVUT\Transfert\Stampe UT"
+#test#$destination="C:\Users\mcavina\OneDrive - CEPI s.p.a\Desktop\prova"
+$destination="\\SRVUT\Transfert\Stampe UT"
 #giorno di esecuzione
 $date=(Get-Date).ToString("yyyyMMdd")
 $myname=$env:USERNAME
@@ -45,12 +45,23 @@ $orderFolder="4900-4999"
 cd "\\srvut\Commesse\$orderFolder\$NumCommessa*"
 $p=pwd
 echo "$p"
+cd "$mypath"
+Get-ChildItem -Path "\\srvut\Commesse\$orderFolder\$NumCommessa*\" -Filter *.dwg | ForEach-Object {
+Copy-Item -Path "$_.FullName" -Destination "$mypath"
+}
 Get-ChildItem -Directory | ForEach-Object {
 $name=$_.Name
-echo $name
+#echo $name
+Copy-Item -Path "$p\*h*$NumCommessa*.dwg" -Destination "$mypath\$name\"
 Copy-Item -Path "T:\MacroUT\Ordinare stampe.xlsx" -Destination "$mypath\$name\"
 if ($name.Contains("Officina")) {
 Copy-Item -Path "\\srvut\ut\FogliElettronici-Modelli\Stampe Officina.xlsx" -Destination "$mypath\$name\"
+}
+if ($name.Contains("Spedizione")) {
+Copy-Item -Path "$p\*t*$NumCommessa*.dwg" -Destination "$mypath\$name\"
+}
+if ($name.Contains("Montatori")) {
+Copy-Item -Path "$p\*t*$NumCommessa*.dwg" -Destination "$mypath\$name\"
 }
 }
 cd ..
