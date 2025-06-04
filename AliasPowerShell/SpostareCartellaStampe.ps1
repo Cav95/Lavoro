@@ -89,4 +89,13 @@ Get-ChildItem -Directory | ForEach-Object {
 
 #Copio tutta la mia cartella nella nuova posizione
 Set-Location ..
-Copy-Item -Recurse .\$mylocation "$destination\$mylocation($myname)_$date"
+Copy-Item -Recurse ".\$mylocation" "$destination\$mylocation($myname)_$date"
+
+$deleteme = ""
+
+while ($deleteme -ne "y" -and $deleteme -ne "n" ) {
+    $deleteme = Read-Host "Vuoi eliniare la cartella Si=[y] No=[n]:"
+}
+if ($deleteme -eq "y") {
+    Remove-Item ".\$mylocation"
+}
