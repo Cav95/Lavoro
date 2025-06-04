@@ -9,9 +9,10 @@ $NumCommessa = $mylocation.Substring(0, 4)
 $destination = "\\SRVUT\Transfert\Stampe UT"
 #giorno di esecuzione
 $date = (Get-Date).ToString("yyyyMMdd")
+#salvo lo username
 $myname = $env:USERNAME
-# Example of if, elseif, and else in PowerShell
 
+#cerco la directory per lo schema
 if ($NumCommessa -lt 3000) {
     $orderFolder = "0_2999"
 }
@@ -55,24 +56,37 @@ else {
     $orderFolder = "4900-4999"
 }
 
+#accedo e salvo la posizione della cartella commessa
 Set-Location "\\srvut\Commesse\$orderFolder\$NumCommessa*"
 $p = Get-Location
-#Write-Output "$p"
+
+#torna alla cartella originale
 Set-Location "$mypath"
+
+#Per ogni sotocartella eseguo delle azioni
 Get-ChildItem -Directory | ForEach-Object {
     $name = $_.Name
+
+    #remove Codici.csv
     Remove-Item "$mypath\$name\Codici.csv"
+
+    #Copio lo schema in tutte
     Copy-Item -Path "$p\*h*$NumCommessa*.dwg" -Destination "$mypath\$name\"
+
+    #Copio l'ordine stampe in tutte
     Copy-Item -Path "T:\MacroUT\Ordinare stampe.xlsx" -Destination "$mypath\$name\"
+
+    #Se la cartella è officina ci metto il foglio dell officina
     if ($name.Contains("Officina")) {
         Copy-Item -Path "\\srvut\ut\FogliElettronici-Modelli\Stampe Officina.xlsx" -Destination "$mypath\$name\"
     }
-    if ($name.Contains("Spedizione")) {
-        Copy-Item -Path "$p\*t*$NumCommessa*.dwg" -Destination "$mypath\$name\"
-    }
+
+    #Se montatori copio anche la pianta
     if ($name.Contains("Montatori")) {
         Copy-Item -Path "$p\*t*$NumCommessa*.dwg" -Destination "$mypath\$name\"
     }
 }
+
+#Copio tutta la mia cartella nella nuova posizione
 Set-Location ..
 Copy-Item -Recurse .\$mylocation "$destination\$mylocation($myname)_$date"
