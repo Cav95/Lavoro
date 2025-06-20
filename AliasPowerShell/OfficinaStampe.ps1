@@ -1,1 +1,1 @@
-copy 'T:\FogliElettronici-Modelli\Stampe Officina.xlsx' .\
+Copy-Item 'T:\FogliElettronici-Modelli\Stampe Officina.xlsx' .\

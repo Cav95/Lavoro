@@ -1,1 +1,1 @@
-copy 'T:\FogliElettronici-Modelli\VST-J-R14.xlsm' .\
+Copy-Item 'T:\FogliElettronici-Modelli\VST-J-R*.xlsm' .\

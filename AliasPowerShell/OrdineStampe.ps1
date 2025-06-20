@@ -1,1 +1,1 @@
-copy 'T:\MacroUT\Ordinare stampe.xlsx' .\
+Copy-Item 'T:\MacroUT\Ordinare stampe.xlsx' .\

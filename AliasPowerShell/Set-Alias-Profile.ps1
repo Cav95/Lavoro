@@ -1,1 +1,1 @@
-cat "\\SRVUT\Transfert\MATTIA CAVINA\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" > $PROFILE
+Get-Content "\\SRVUT\Transfert\MATTIA CAVINA\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" > $PROFILE
