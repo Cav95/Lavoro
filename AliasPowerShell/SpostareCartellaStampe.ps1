@@ -1,3 +1,6 @@
+#Da lanciare da powershell nella cartella di stampe che si vuole processare , la cartella deve essere quella
+#proveniente da fusion.
+
 #mi salvo la mia locazione attuale per esteso
 $mypath = Get-Location
 #Prendo il nome della directory che voglio spostare
